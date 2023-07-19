@@ -1,0 +1,66 @@
+spring:
+  profiles:
+    #配置选择 dev:开发环境 | test:测试环境 | pro:生产环境
+    active: dev
+  mvc:
+    servlet:
+      load-on-startup: 1
+---
+#应用服务 WEB 访问端口
+server.port: 8081
+spring:
+  #配置项
+  config:
+    activate:
+      #当前配置名 dev:开发环境 | test:测试环境 | pro:生产环境
+      on-profile: dev
+  #数据库配置
+  datasource:
+    #数据库驱动名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #MysqlUrl格式: jdbc:mysql://IP:Port/DataBaseName
+    url: jdbc:mysql://localhost:3306/xclhove-web
+    #数据库用户名
+    username: root
+    #数据库密码
+    password: 123456
+---
+
+#应用服务 WEB 访问端口
+server.port: 8082
+spring:
+  #配置项
+  config:
+    activate:
+      #当前配置名 dev:开发环境 | test:测试环境 | pro:生产环境
+      on-profile: test
+  #数据库配置
+  datasource:
+    #数据库驱动名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #MysqlUrl格式: jdbc:mysql://IP:Port/DataBaseName
+    url: jdbc:mysql://localhost:3306/DataBaseName
+    #数据库用户名
+    username: root
+    #数据库密码
+    password: 123456
+---
+
+#应用服务 WEB 访问端口
+server.port: 8083
+spring:
+  #配置项
+  config:
+    activate:
+      #当前配置名 dev:开发环境 | test:测试环境 | pro:生产环境
+      on-profile: pro
+  #数据库配置
+  datasource:
+    #数据库驱动名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #MysqlUrl格式: jdbc:mysql://IP:Port/DataBaseName
+    url: jdbc:mysql://localhost:3306/DataBaseName
+    #数据库用户名
+    username: root
+    #数据库密码
+    password: 123456
