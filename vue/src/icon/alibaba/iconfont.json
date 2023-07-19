@@ -1,0 +1,30 @@
+{
+  "id": "4128256",
+  "name": "p1",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "26267572",
+      "name": "gitee",
+      "font_class": "gitee",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "18986691",
+      "name": "GitHub",
+      "font_class": "GitHub",
+      "unicode": "e8c6",
+      "unicode_decimal": 59590
+    },
+    {
+      "icon_id": "4766685",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e7c6",
+      "unicode_decimal": 59334
+    }
+  ]
+}
