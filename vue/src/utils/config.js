@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let config = {
-    serverUrl: 'http://localhost:8080',
+    serverUrl: 'http://localhost:8081',
     beiAnHao: '蜀ICP备2023003714号',
 }
 //读取配置
