@@ -2,13 +2,19 @@ spring:
   profiles:
     #配置选择 dev:开发环境 | test:测试环境 | pro:生产环境
     active: dev
-  mvc:
-    servlet:
-      load-on-startup: 1
+  main:
+    banner-mode: off
 ---
 #应用服务 WEB 访问端口
 server.port: 8081
+#MyBatis
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
   #配置项
   config:
     activate:
@@ -39,7 +45,7 @@ spring:
     #数据库驱动名
     driver-class-name: com.mysql.cj.jdbc.Driver
     #MysqlUrl格式: jdbc:mysql://IP:Port/DataBaseName
-    url: jdbc:mysql://localhost:3306/DataBaseName
+    url: jdbc:mysql://localhost:3306/xclhove-web
     #数据库用户名
     username: root
     #数据库密码
@@ -59,7 +65,7 @@ spring:
     #数据库驱动名
     driver-class-name: com.mysql.cj.jdbc.Driver
     #MysqlUrl格式: jdbc:mysql://IP:Port/DataBaseName
-    url: jdbc:mysql://localhost:3306/DataBaseName
+    url: jdbc:mysql://localhost:3306/xclhove-web
     #数据库用户名
     username: root
     #数据库密码
