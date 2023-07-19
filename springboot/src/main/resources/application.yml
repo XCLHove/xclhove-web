@@ -7,10 +7,16 @@ spring:
 ---
 #应用服务 WEB 访问端口
 server.port: 8081
+#日志
+logging:
+  level:
+    root: warn
 #MyBatis
 mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #控制台打印完整带参数SQL语句
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #扫描项目的xml文件
+  mapper-locations: mapper/*.xml
 spring:
   mvc:
     servlet:
@@ -54,6 +60,10 @@ spring:
 
 #应用服务 WEB 访问端口
 server.port: 8083
+#MyBatis
+mybatis:
+  #扫描项目的xml文件
+  mapper-locations: mapper/*.xml
 spring:
   #配置项
   config:
