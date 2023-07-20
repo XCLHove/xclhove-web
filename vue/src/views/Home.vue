@@ -2,12 +2,12 @@
   <div class="homeContainer">
     <div class="head">XCLHove</div>
     <div class="gitInfo">
-      <a v-for="item in gitInfos" :href="item.url" target="_blank"><i :class="item.icon"></i></a>
+      <a v-for="item in gitInfos" :href="item.url" :key="item.id" target="_blank"><i :class="item.icon"></i></a>
     </div>
     <!--    快速导航    -->
     <div class="fastNavigation">
       <span class="title">快速导航</span>
-      <span v-for="item in fastNavigations">
+      <span v-for="item in fastNavigations" :key="item.id">
         <a :href="item.url" target="_blank">{{ item.name }}</a>
       </span>
     </div>
@@ -130,8 +130,8 @@ export default {
   data() {
     return {
       gitInfos: [
-        {name: 'github', url: 'https://github.com/xclhove', icon: 'iconfont icon-GitHub'},
-        {name: 'gitee', url: 'https://gitee.com/xclhove', icon: 'iconfont icon-gitee'},
+        {id:1, name: 'github', url: 'https://github.com/xclhove', icon: 'iconfont icon-GitHub'},
+        {id:2, name: 'gitee', url: 'https://gitee.com/xclhove', icon: 'iconfont icon-gitee'},
       ],
       fastNavigations: [
         {id: 1, name: '资源站(常用)', url: 'https://zfile.xclhove.top/XCLHove_onedrive_1'},
