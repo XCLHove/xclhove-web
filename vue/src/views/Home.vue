@@ -15,7 +15,9 @@
     <div class="searchInput">
       <el-input v-model="pagination.searchText" placeholder="搜索资源">
         <template #append>
-          <el-button :icon="Search" @click="load"/>
+            <el-button :icon="Search" @click="load">
+              <span class="buttonText">搜索</span>
+            </el-button>
         </template>
       </el-input>
     </div>
@@ -100,6 +102,11 @@
 
 .fastNavigation span a:hover {
   text-decoration: underline;
+}
+
+.searchInput .buttonText {
+  position: relative;
+  bottom: 2px;
 }
 
 .searchResult {
