@@ -1,14 +1,7 @@
 import axios from "axios";
 
-//读取配置
-async function readConfig() {
-    let config = {}
-    await axios.get('/config.json').then(result => {
-        config = result.data ? result.data : config
-    })
-    return config
-}
-
-const config = await readConfig()
+const config = await axios.get('/config.json').then(result => {
+    return result.data
+})
 //导出以便引用
 export default config
