@@ -1,8 +1,9 @@
 import axios from 'axios'
 import config from "@/utils/config.js";
+import prompt from "@/utils/prompt";
 
 //读取外部配置文件后端地址
-const serverUrl = config.serverUrl
+const serverUrl = config.serverUrl ? config.serverUrl : 'http://localhost:8080'
 
 const request = axios.create({
     baseURL: serverUrl,  // 这里加上后端接口前缀，后端必须进行跨域配置
@@ -37,7 +38,8 @@ request.interceptors.response.use(
         return res;
     },
     error => {
-        console.log('err' + error); // for debug
+        //console.log('err:' + error); // for debug
+        prompt('请求数据失败', 'error')
         return Promise.reject(error);
     }
 )
