@@ -4,24 +4,25 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 .beiAnHao {
   position: absolute;
   bottom: 0;
   text-align: center;
   width: calc(100% - 5px);
-}
 
-.beiAnHao a {
-  text-decoration: none;
-  color: #909bb7;
-  display: block;
-  margin: 0 auto;
+  a {
+    text-decoration: none;
+    color: #909bb7;
+    display: block;
+    margin: 0 auto;
+  }
 }
 </style>
 
 <script>
 import config from "@/utils/config.js"
+
 export default {
   computed: {
     beiAnHao() {

@@ -15,9 +15,9 @@
     <div class="searchInput">
       <el-input v-model="pagination.searchText" placeholder="搜索资源">
         <template #append>
-            <el-button :icon="Search" @click="load">
-              <span class="buttonText">搜索</span>
-            </el-button>
+          <el-button :icon="Search" @click="load">
+            <span class="buttonText">搜索</span>
+          </el-button>
         </template>
       </el-input>
     </div>
@@ -50,73 +50,75 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 .homeContainer {
   background: #3c3f41;
   color: #42b883;
   width: 100%;
   height: 100vh;
-}
 
-.head {
-  width: calc(100% - 5px);
-  font-size: 50px;
-  text-align: center;
-  padding: 10px 0;
-}
+  .head {
+    width: calc(100% - 5px);
+    font-size: 50px;
+    text-align: center;
+    padding: 10px 0;
+  }
 
-.gitInfo {
-  text-align: center;
-}
+  .gitInfo {
+    text-align: center;
 
-.gitInfo a {
-  margin: 0 20px;
-  text-decoration: none;
-}
+    a {
+      margin: 0 20px;
+      text-decoration: none;
 
-.gitInfo a:hover {
-  opacity: 0.5;
-}
+      &:hover {
+        opacity: 0.5;
+      }
 
-.gitInfo a i {
-  font-size: 50px;
-  color: var(--color-vue);
-}
+      i {
+        font-size: 50px;
+        color: var(--color-vue);
+      }
+    }
+  }
 
-.fastNavigation {
-  margin: 5px 0;
-}
+  .fastNavigation {
+    margin: 5px 0;
 
-.fastNavigation .title {
-  font-weight: 700;
-}
+    .title {
+      font-weight: 700;
+    }
 
-.fastNavigation span {
-  margin: 0 10px;
-}
+    span {
+      margin: 0 10px;
 
-.fastNavigation span a {
-  color: #42b883;
-  text-decoration: none;
-}
+      a {
+        color: #42b883;
+        text-decoration: none;
 
-.fastNavigation span a:hover {
-  text-decoration: underline;
-}
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 
-.searchInput .buttonText {
-  position: relative;
-  bottom: 2px;
-}
+  .searchInput {
+    .buttonText {
+      position: relative;
+      bottom: 2px;
+    }
+  }
 
-.searchResult {
-  overflow: hidden;
-  border-radius: 5px;
-  margin: 5px auto;
-}
+  .searchResult {
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 5px auto;
 
-.searchResult .pagination {
-  margin: 5px 0;
+    .pagination {
+      margin: 5px 0;
+    }
+  }
 }
 </style>
 
@@ -137,8 +139,8 @@ export default {
   data() {
     return {
       gitInfos: [
-        {id:1, name: 'github', url: 'https://github.com/xclhove', icon: 'iconfont icon-GitHub'},
-        {id:2, name: 'gitee', url: 'https://gitee.com/xclhove', icon: 'iconfont icon-gitee'},
+        {id: 1, name: 'github', url: 'https://github.com/xclhove', icon: 'iconfont icon-GitHub'},
+        {id: 2, name: 'gitee', url: 'https://gitee.com/xclhove', icon: 'iconfont icon-gitee'},
       ],
       fastNavigations: [
         {id: 1, name: '资源站(常用)', url: 'https://zfile.xclhove.top/XCLHove_onedrive_1'},
@@ -159,7 +161,7 @@ export default {
     pagination: {
       deep: true,
       immediate: false,
-      handler (newValue, oldValue) {
+      handler(newValue, oldValue) {
         this.load()
       }
     }

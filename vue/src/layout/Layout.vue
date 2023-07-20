@@ -4,7 +4,7 @@
   <BeiAnHao/>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>
 
