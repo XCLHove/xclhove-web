@@ -76,7 +76,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>top.xclhove.spring.Application</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
