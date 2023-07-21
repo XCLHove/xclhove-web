@@ -146,7 +146,7 @@ export default {
         {id: 1, name: '资源站(常用)', url: 'https://zfile.xclhove.top/XCLHove_onedrive_1'},
         {id: 2, name: '资源站(高速)', url: 'https://alist.xclhove.top'},
         {id: 3, name: '资源站(不常用)', url: 'https://zfile.xclhove.top/XCLHove_onedrive_2'},
-        {id: 4, name: '网络U盘', url: 'https://zfile.xclhove.top/temp_upload'},
+        {id: 4, name: '网络U盘', url: 'https://zfile.xclhove.top/upload before'},
       ],
       links: [],
       pagination: {
@@ -168,6 +168,7 @@ export default {
   },
   created() {
     this.load()
+    this.loadFastNavigations()
   },
   methods: {
     //加载数据
@@ -186,6 +187,23 @@ export default {
           this.total = result.data.total
           return
         }
+      })
+    },
+    loadFastNavigations() {
+      request.get('/links', {
+        params: {
+          searchText: 'fastNavigations',
+          pageNumber: 1,
+          pageSize: 10,
+        }
+      }).then(result => {
+        if (result.code !== '200') {
+          return
+        }
+        if (result.data.links.length <= 0) {
+          return
+        }
+        this.fastNavigations = result.data.links
       })
     },
     // 分页-每页数量
