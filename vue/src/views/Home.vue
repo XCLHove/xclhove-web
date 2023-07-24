@@ -1,17 +1,19 @@
 <template>
+  <!--  首页  -->
   <div class="homeContainer">
+    <!--  head  -->
     <div class="head">XCLHove</div>
     <div class="gitInfo">
       <a v-for="item in gitInfos" :href="item.url" :key="item.id" target="_blank"><i :class="item.icon"></i></a>
     </div>
-    <!--    快速导航    -->
+    <!--  快速导航  -->
     <div class="fastNavigation">
       <span class="title">快速导航</span>
       <span v-for="item in fastNavigations" :key="item.id">
         <a :href="item.url" target="_blank">{{ item.name }}</a>
       </span>
     </div>
-    <!--    搜索框     -->
+    <!--  搜索框 -->
     <div class="searchInput">
       <el-input v-model="pagination.searchText" placeholder="搜索资源">
         <template #append>
@@ -21,7 +23,7 @@
         </template>
       </el-input>
     </div>
-    <!--    搜索结果    -->
+    <!--  搜索结果  -->
     <div class="searchResult" v-show="links.length > 0">
       <el-table :data="links">
         <el-table-column label="名称" prop="name" width="200" align="center"/>

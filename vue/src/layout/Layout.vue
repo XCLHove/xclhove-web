@@ -1,6 +1,5 @@
 <template>
   <RouterView/>
-  <!--备案号-->
   <BeiAnHao/>
 </template>
 

@@ -1,4 +1,5 @@
 <template>
+  <!--  备案号 -->
   <div class="beiAnHao">
     <a href="https://beian.miit.gov.cn" target="_blank">{{ beiAnHao }}</a>
   </div>
