@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class KeyWord {
     Integer id;
-    Integer LinkId;
+    Integer linkId;
     String keyWord;
 }
