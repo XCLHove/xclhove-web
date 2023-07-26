@@ -8,6 +8,7 @@ import Head from '@/components/Head.vue';
 import request from "@/utils/request";
 import router from "@/router/router";
 import {ref, watch} from "vue";
+import sleep from "@/utils/sleep";
 
 const gitInfos = ref([
   {id: 1, name: 'github', url: 'https://github.com/xclhove', icon: 'iconfont icon-GitHub'},
@@ -51,8 +52,9 @@ const load = () => {
       pageNumber: pageNumber.value,
       pageSize: pageSize.value,
     }
-  }).then(result => {
+  }).then(async result => {
     if (result.code === '200') {
+      if (result.data.total > 0) await sleep(0.3)
       links.value = result.data.links
       total.value = result.data.total
       searchResultLoading.value = false
@@ -117,31 +119,33 @@ load()
       </el-input>
     </div>
     <!--  搜索结果  -->
-    <div class="searchResult" v-show="links.length > 0" v-loading="searchResultLoading">
-      <el-table :data="links">
-        <el-table-column label="名称" prop="name" align="center" show-overflow-tooltip/>
-        <el-table-column label="链接" prop="link" align="center" show-overflow-tooltip>
-          <template #default="links">
-            <el-link :href="links.row.url" type="primary" target="_blank">立即前往：{{ links.row.name }}</el-link>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!--  分页  -->
-      <div class="pagination">
-        <el-pagination
-            v-model:current-page="pageNumber"
-            v-model:page-size="pageSize"
-            :total="total"
-            :page-sizes="[5, 10, 15, 30, 50]"
-            :small=false
-            :disabled=false
-            :background=false
-            layout="total, sizes, prev, pager, next, jumper"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-        />
+    <Transition>
+      <div class="searchResult" v-show="links.length > 0" v-loading="searchResultLoading">
+        <el-table :data="links">
+          <el-table-column label="名称" prop="name" align="center" show-overflow-tooltip/>
+          <el-table-column label="链接" prop="link" align="center" show-overflow-tooltip>
+            <template #default="links">
+              <el-link :href="links.row.url" type="primary" target="_blank">立即前往：{{ links.row.name }}</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!--  分页  -->
+        <div class="pagination">
+          <el-pagination
+              v-model:current-page="pageNumber"
+              v-model:page-size="pageSize"
+              :total="total"
+              :page-sizes="[5, 10, 15, 30, 50]"
+              :small=false
+              :disabled=false
+              :background=false
+              layout="total, sizes, prev, pager, next, jumper"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+          />
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
