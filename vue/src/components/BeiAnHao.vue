@@ -1,7 +1,11 @@
+<script setup>
+import config from "@/utils/config.js"
+</script>
+
 <template>
   <!--  备案号 -->
   <div class="beiAnHao">
-    <a href="https://beian.miit.gov.cn" target="_blank">{{ beiAnHao }}</a>
+    <a href="https://beian.miit.gov.cn" target="_blank">{{ config.beiAnHao }}</a>
   </div>
 </template>
 
@@ -22,15 +26,3 @@
   }
 }
 </style>
-
-<script>
-import config from "@/utils/config.js"
-
-export default {
-  computed: {
-    beiAnHao() {
-      return config.beiAnHao
-    },
-  },
-}
-</script>
