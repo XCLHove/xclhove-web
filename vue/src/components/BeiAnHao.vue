@@ -6,17 +6,19 @@
 </template>
 
 <style lang="less" scoped>
+@import "@/assets/main";
+
 .beiAnHao {
   position: absolute;
   bottom: 0;
-  text-align: center;
-  width: calc(100% - 5px);
+  width: 100%;
+  padding: 5px 0;
+  .flex();
+  justify-content: center;
 
   a {
     text-decoration: none;
     color: #909bb7;
-    display: block;
-    margin: 0 auto;
   }
 }
 </style>

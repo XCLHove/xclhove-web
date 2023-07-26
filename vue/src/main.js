@@ -1,4 +1,4 @@
-import '@/assets/main.css'
+import '@/assets/main.less'
 import '@/icon/alibaba/iconfont.css'
 import {createApp} from 'vue'
 import App from '@/App.vue'
