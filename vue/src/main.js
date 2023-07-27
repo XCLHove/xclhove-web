@@ -9,16 +9,18 @@ import router from "@/router/router";
 //element-plus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import * as ElIcons from '@element-plus/icons'
 //element-plus国际化
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 //axios封装
 import request from "@/utils/request.js";
-//消息提示
-import  "@/utils/prompt.js"
 
 const app = createApp(App)
 app.use(router)
 app.use(ElementPlus, {locale: zhCn})
+for (name in ElIcons){
+    app.component(name,ElIcons[name])
+}
 app.config.globalProperties.request = request
 app.component('Load', Load)
 app.component('Head', Head)
