@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6598349",
+      "name": "login",
+      "font_class": "login",
+      "unicode": "e8ef",
+      "unicode_decimal": 59631
+    },
+    {
       "icon_id": "26267572",
       "name": "gitee",
       "font_class": "gitee",
