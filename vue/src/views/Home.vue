@@ -4,9 +4,7 @@ import {
   Search,
 } from "@element-plus/icons-vue";
 //组件
-import Head from '@/components/Head.vue';
 import request from "@/utils/request";
-import router from "@/router/router";
 import {ref, watch} from "vue";
 import sleep from "@/utils/sleep";
 
