@@ -167,6 +167,29 @@ load()
     padding: 10px 0;
   }
 
+  .backLogin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    a {
+      text-decoration: none;
+
+      i {
+        font-size: 30px;
+        color: var(--color-gray);
+      }
+
+      &:hover {
+        opacity: 0.5;
+
+        i {
+          color: var(--color-vue);
+        }
+      }
+    }
+  }
+
   .gitInfo {
     text-align: center;
 
