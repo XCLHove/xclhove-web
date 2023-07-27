@@ -1,5 +1,6 @@
-package top.xclhove.spring.service;
+package top.xclhove.spring.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.xclhove.spring.common.Result;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class LinkService {
+public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> {
     @Autowired
     private LinkMapper linkMapper;
 

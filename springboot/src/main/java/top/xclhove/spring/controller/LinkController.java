@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.xclhove.spring.common.Result;
-import top.xclhove.spring.service.LinkService;
+import top.xclhove.spring.service.impl.LinkServiceImpl;
 
 @RestController
 @RequestMapping("/links")
 public class LinkController {
 
     @Autowired
-    private LinkService linkService;
+    private LinkServiceImpl linkServiceImpl;
 
     @GetMapping
     public Result search(@RequestParam String searchText,
                          @RequestParam Integer pageNumber,
                          @RequestParam Integer pageSize
     ) {
-        return linkService.search(searchText, pageNumber, pageSize);
+        return linkServiceImpl.search(searchText, pageNumber, pageSize);
     }
 }
