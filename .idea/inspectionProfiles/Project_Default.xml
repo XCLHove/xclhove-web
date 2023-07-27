@@ -1,10 +1,21 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="CssUnknownProperty" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myCustomPropertiesEnabled" value="true" />
+      <option name="myIgnoreVendorSpecificProperties" value="false" />
+      <option name="myCustomPropertiesList">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="box-sizing" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="8">
+          <list size="11">
             <item index="0" class="java.lang.String" itemvalue="v-show" />
             <item index="1" class="java.lang.String" itemvalue="#default" />
             <item index="2" class="java.lang.String" itemvalue="v-for" />
@@ -13,6 +24,9 @@
             <item index="5" class="java.lang.String" itemvalue=":class" />
             <item index="6" class="java.lang.String" itemvalue="#append" />
             <item index="7" class="java.lang.String" itemvalue="scoped" />
+            <item index="8" class="java.lang.String" itemvalue="@click" />
+            <item index="9" class="java.lang.String" itemvalue="v-loading" />
+            <item index="10" class="java.lang.String" itemvalue="setup" />
           </list>
         </value>
       </option>
@@ -21,7 +35,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="12">
+          <list size="16">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -34,6 +48,10 @@
             <item index="9" class="java.lang.String" itemvalue="el-pagination" />
             <item index="10" class="java.lang.String" itemvalue="el-input" />
             <item index="11" class="java.lang.String" itemvalue="el-button" />
+            <item index="12" class="java.lang.String" itemvalue="router-link" />
+            <item index="13" class="java.lang.String" itemvalue="head" />
+            <item index="14" class="java.lang.String" itemvalue="transition" />
+            <item index="15" class="java.lang.String" itemvalue="el-form-item" />
           </list>
         </value>
       </option>
