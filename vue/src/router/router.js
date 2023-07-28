@@ -18,6 +18,11 @@ const router = createRouter({
             ]
         },
         {
+            path: '/init',
+            name: 'init',
+            component: () => import('@/views/Init.vue'),
+        },
+        {
             path: '/404',
             name: '404',
             component: () => import('@/views/404.vue'),
