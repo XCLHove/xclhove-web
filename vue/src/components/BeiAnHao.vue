@@ -1,12 +1,35 @@
 <script setup>
 import config from "@/utils/config.js"
+import {onMounted, ref, watch} from "vue";
+
+const show =ref(true)
+const height = ref()
+watch(height, () => {
+  if (height.value < 520) {
+    show.value = false
+    return
+  }
+  show.value = true
+})
+window.onresize = () => {
+  height.value = document.body.clientHeight
+}
+
+const pageInit = () => {
+  height.value = document.body.clientHeight
+}
+onMounted(() => {
+  pageInit()
+})
 </script>
 
 <template>
   <!--  备案号 -->
-  <div class="beiAnHao">
-    <a href="https://beian.miit.gov.cn" target="_blank">{{ config.beiAnHao }}</a>
-  </div>
+  <Transition>
+    <div class="beiAnHao" v-show="show">
+      <a href="https://beian.miit.gov.cn" target="_blank">{{ config.beiAnHao }}</a>
+    </div>
+  </Transition>
 </template>
 
 <style lang="less" scoped>
