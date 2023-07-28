@@ -14,14 +14,21 @@ import * as ElIcons from '@element-plus/icons'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 //axios封装
 import request from "@/utils/request.js";
+//pinia
+import pinia from "@/pinia/pinia";
 
 const app = createApp(App)
+
 app.use(router)
 app.use(ElementPlus, {locale: zhCn})
-for (name in ElIcons){
-    app.component(name,ElIcons[name])
-}
+app.use(pinia)
+
 app.config.globalProperties.request = request
+
+for (name in ElIcons) {
+    app.component(name, ElIcons[name])
+}
 app.component('Load', Load)
 app.component('Head', Head)
+
 app.mount('#app')
