@@ -66,7 +66,6 @@ const systemCheck = () => {
   ).then(result => {
     const systemStatuses = result.data.systemStatuses
     const installedConfig = systemStatuses.filter(status => status.name === 'installed')[0]
-    console.log(installedConfig)
     if (installedConfig.value === 1) {
       router.push('/backLogin')
     }
