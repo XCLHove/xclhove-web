@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class Result {
     //状态码
     private String code;
-    //
     private String message;
     private String type;
     private Object data;
@@ -38,6 +37,10 @@ public class Result {
     }
 
     public static Result error(String message) {
+        return new Result(Constant.CODE_500, message, Constant.ERROR, null);
+    }
+
+    public static Result error(String message, Object data) {
         return new Result(Constant.CODE_500, message, Constant.ERROR, null);
     }
 
