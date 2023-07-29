@@ -1,4 +1,4 @@
-package top.xclhove.spring.common;
+package top.xclhove.spring.common.Constant;
 
 public interface Constant {
     //test

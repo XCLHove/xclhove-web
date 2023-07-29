@@ -3,6 +3,7 @@ package top.xclhove.spring.common;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import top.xclhove.spring.common.Constant.Constant;
 
 @Data
 @NoArgsConstructor
