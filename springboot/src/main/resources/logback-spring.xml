@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds">
+    <contextName>logback</contextName>
+
+    <!-- 导入application.yml -->
+    <property resource="application.yml"/>
+    <!-- 日志单文件最大大小 -->
+    <property name="maxFileSize" value="10MB"/>
+    <!-- 超出{totalSizeCap}删除老文件 -->
+    <property name="totalSizeCap" value="1GB"/>
+    <!-- 日志最大保存时间（天） -->
+    <property name="maxHistory" value="30"/>
+    <!-- DEBUG 日志最大保存时间（天） -->
+    <property name="debugMaxHistory" value="3"/>
+    <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
+    <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} %-5level : %msg%n"/>
+
+    <!-- 日志根目录 -->
+    <springProperty scope="context" name="logPath" source="xclhoveWeb.log.file.path"/>
+    <!-- 日志名称 -->
+    <springProperty scope="context" name="logFileName" source="xclhoveWeb.log.file.name"/>
+    <!-- 日志pattern -->
+    <springProperty scope="context" name="logFileNamePattern" source="xclhoveWeb.log.file.pattern"/>
+
+    <!-- 控制台输出日志 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- 日志过滤{level}以下级别 -->
+            <level>info</level>
+        </filter>
+        <encoder>
+            <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <!-- info级别日志 -->
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/${logFileName}${logFileNamePattern}</fileNamePattern>
+            <!-- 保留{maxHistory}天的历史记录 -->
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 日志文件的最大大小 -->
+                <maxFileSize>${maxFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 超出删除老文件 -->
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <!-- project package path -->
+    <logger name="top" level="INFO"/>
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="info"/>
+    </root>
+</configuration>
