@@ -15,6 +15,7 @@ spring:
       load-on-startup: 1
   #配置项
   config:
+    import: classpath:xclhove-web.yml
     activate:
       #当前配置名 dev:开发环境 | test:测试环境 | pro:生产环境
       on-profile: dev
