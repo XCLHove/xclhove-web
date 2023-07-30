@@ -1,5 +1,6 @@
 package top.xclhove.spring.service.impl;
 
+import cn.hutool.http.ContentType;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSONObject;
@@ -7,7 +8,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import top.xclhove.spring.common.Constant.ContentType;
 import top.xclhove.spring.common.Constant.OneDriveKey;
 import top.xclhove.spring.common.Result;
 import top.xclhove.spring.entity.OneDrive;
@@ -53,8 +53,8 @@ public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
                 OneDriveKey.REFRESH_TOKEN, oneDrive.getRefresh_token(),
                 OneDriveKey.GRANT_TYPE, OneDriveKey.REFRESH_TOKEN);
         HttpResponse response = HttpUtil
-                .createPost(OneDriveKey.API_URL)
-                .body(params, ContentType.X_WWW_FORM_URLENCODED)
+                .createPost(OneDriveKey.Api.TOKEN)
+                .body(params, ContentType.FORM_URLENCODED.getValue())
                 .execute();
 
         int responseStatus = response.getStatus();
