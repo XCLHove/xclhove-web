@@ -4,29 +4,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.xclhove.spring.common.Result;
 import top.xclhove.spring.entity.DTO.Admin;
-import top.xclhove.spring.service.impl.SystemConfigService;
-import top.xclhove.spring.service.impl.SystemStatusService;
+import top.xclhove.spring.service.impl.SystemConfigServiceImpl;
+import top.xclhove.spring.service.impl.SystemStatusServiceImpl;
 
 @RestController
 @RequestMapping("/system")
 public class SystemController {
     @Autowired
-    private SystemStatusService systemStatusService;
+    private SystemStatusServiceImpl systemStatusServiceImpl;
     @Autowired
-    private SystemConfigService systemConfigService;
+    private SystemConfigServiceImpl systemConfigServiceImpl;
 
     @PostMapping("/init")
     public Result systemInit(@RequestBody Admin admin) {
-        return systemConfigService.systemInit(admin);
+        return systemConfigServiceImpl.systemInit(admin);
     }
 
     @PostMapping("/backLogin")
     public Result backLogin (@RequestBody Admin admin) {
-        return systemConfigService.backLogin(admin);
+        return systemConfigServiceImpl.backLogin(admin);
     }
 
     @GetMapping("/statuses")
     public Result getSystemStatus() {
-        return systemStatusService.getSystemStatus();
+        return systemStatusServiceImpl.getSystemStatus();
     }
 }

@@ -11,10 +11,9 @@ import top.xclhove.spring.mapper.SystemStatusMapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
-public class SystemStatusService extends ServiceImpl<SystemStatusMapper, SystemStatus> {
+public class SystemStatusServiceImpl extends ServiceImpl<SystemStatusMapper, SystemStatus> {
     @Autowired
     private SystemStatusMapper systemStatusMapper;
 

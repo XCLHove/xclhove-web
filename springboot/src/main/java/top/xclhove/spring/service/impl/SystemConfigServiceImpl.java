@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class SystemConfigService extends ServiceImpl<SystemConfigMapper, SystemConfig> {
+public class SystemConfigServiceImpl extends ServiceImpl<SystemConfigMapper, SystemConfig> {
     @Autowired
-    private SystemStatusService systemStatusService;
+    private SystemStatusServiceImpl systemStatusServiceImpl;
     @Autowired
     private SystemConfigMapper systemConfigMapper;
     @Autowired
@@ -90,7 +90,7 @@ public class SystemConfigService extends ServiceImpl<SystemConfigMapper, SystemC
         }
 
         SystemStatus systemStatus = new SystemStatus(null, "installed", 1);
-        boolean updateSuccess = systemStatusService.updateSystemStatus(systemStatus);
+        boolean updateSuccess = systemStatusServiceImpl.updateSystemStatus(systemStatus);
         if (updateSuccess) {
             data.put("initSuccess", true);
             return Result.success("初始化成功！", data);
