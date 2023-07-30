@@ -22,12 +22,22 @@ import static top.xclhove.spring.utils.interpolation.Interpolations.indexed;
 @Service
 @Slf4j
 public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
+
+    public Result refreshOneDriveAccessToken() {
+        List<OneDrive> oneDrives = this.list();
+        for (OneDrive oneDrive : oneDrives) {
+            this.refreshStorageSource(oneDrive);
+        }
+        return Result.success("刷新成功！");
+    }
+
     public Result getAll() {
         Map<String, Object> data = new HashMap<>();
         List<OneDrive> oneDrives = this.list();
         data.put("oneDrives", oneDrives);
         return Result.success(data);
     }
+
     public Result refreshStorageSource(OneDrive oneDrive) {
         boolean refreshSuccess = false;
 
