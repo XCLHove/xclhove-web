@@ -24,6 +24,10 @@ public class Result {
         return new Result(Constant.CODE_200, Constant.SUCCESS, Constant.SUCCESS, data);
     }
 
+    public static Result success(String message) {
+        return new Result(Constant.CODE_200, message, Constant.SUCCESS, null);
+    }
+
     public static Result success(String message, Object data) {
         return new Result(Constant.CODE_200, message, Constant.SUCCESS, data);
     }
