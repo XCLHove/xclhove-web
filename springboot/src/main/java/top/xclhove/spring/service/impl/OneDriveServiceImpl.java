@@ -23,10 +23,10 @@ import static top.xclhove.spring.utils.interpolation.Interpolations.indexed;
 @Slf4j
 public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
 
-    public Result refreshOneDriveAccessToken() {
+    public Result refreshAllOneDriveAccessToken() {
         List<OneDrive> oneDrives = this.list();
         for (OneDrive oneDrive : oneDrives) {
-            this.refreshStorageSource(oneDrive);
+            this.refreshOneDriveAccessToken(oneDrive);
         }
         return Result.success("刷新成功！");
     }
@@ -38,7 +38,7 @@ public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
         return Result.success(data);
     }
 
-    public Result refreshStorageSource(OneDrive oneDrive) {
+    public Result refreshOneDriveAccessToken(OneDrive oneDrive) {
         boolean refreshSuccess = false;
 
         String params = indexed(
@@ -60,7 +60,7 @@ public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
         int responseStatus = response.getStatus();
         if (responseStatus != HttpStatus.OK.value()) {
             log.info(String.valueOf(response));
-            return Result.error("请求失败！", refreshSuccess);
+            return Result.error("请求失败！", oneDrive);
         }
 
         JSONObject jsonResponseBody = JSONObject.parseObject(response.body());
@@ -73,7 +73,7 @@ public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
         refreshSuccess = this.updateById(oneDrive);
         if (refreshSuccess) {
             log.info("刷新存储源：'{}'成功！", oneDrive.getName());
-            return Result.success("更新成功！", refreshSuccess);
+            return Result.success("更新成功！", oneDrive);
         }
 
         log.info(
@@ -90,6 +90,6 @@ public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
                 newAccessToken,
                 newRefreshToken);
 
-        return Result.error("请求成功，更新失败！", refreshSuccess);
+        return Result.error("请求成功，更新失败！", oneDrive);
     }
 }
