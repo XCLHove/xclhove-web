@@ -12,8 +12,17 @@
     <property name="maxHistory" value="30"/>
     <!-- DEBUG 日志最大保存时间（天） -->
     <property name="debugMaxHistory" value="3"/>
-    <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
-    <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} %-5level : %msg%n"/>
+    <!-- LOG_PATTERN_PART -->
+    <property name="LOG_PATTERN_PART_1" value="%date{HH:mm:ss.SSS} %-5level--------log-------------------------%n"/>
+    <!--
+    格式化输出：%date表示日期，
+    %thread表示线程名，
+    %-5level：级别从左显示5个字符宽度，
+    %msg：日志消息，
+    %n是换行符
+    -->
+    <property name="LOG_PATTERN_PART_2" value="%msg%n"/>
+    <property name="LOG_PATTERN" value="${LOG_PATTERN_PART_1}${LOG_PATTERN_PART_2}${LOG_PATTERN_PART_1}"/>
 
     <!-- 日志根目录 -->
     <springProperty scope="context" name="logPath" source="xclhoveWeb.log.file.path"/>
@@ -50,7 +59,7 @@
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>DEBUG</level>
+            <level>info</level>
         </filter>
     </appender>
 
