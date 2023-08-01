@@ -16,4 +16,5 @@ public class OneDrive {
     private String redirect_uri;
     private String access_token;
     private String refresh_token;
+    private String driveId;
 }
