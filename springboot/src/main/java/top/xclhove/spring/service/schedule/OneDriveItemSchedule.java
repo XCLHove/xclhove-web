@@ -20,6 +20,6 @@ public class OneDriveItemSchedule {
     @Scheduled(fixedRate = 1000 * 60 * 30, initialDelay = 1000 * 60 * 10)
     void refreshAllOneDriveItem() {
         log.info("执行刷新所有 OneDriveItem 的定时任务");
-        oneDriveItemService.getAllItemInfo();
+        oneDriveItemService.getAllOneDriveAllItemInfo();
     }
 }

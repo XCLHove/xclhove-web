@@ -16,6 +16,7 @@ public interface OneDriveKey {
     }
     public interface Path {
         String ROOT = "/me/drive/root";
+        String ROOT_ITEM_ID = "/:";
         String CHILDREN = "/children";
     }
     public interface HttpError {
