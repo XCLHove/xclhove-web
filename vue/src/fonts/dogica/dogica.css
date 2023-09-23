@@ -2,15 +2,3 @@
     font-family: dogica;
     src: url("@/fonts/dogica/dogica.ttf");
 }
-@font-face {
-    font-family: dogicabold;
-    src: url("@/fonts/dogica/dogicabold.ttf");
-}
-@font-face {
-    font-family: dogicapixel;
-    src: url("@/fonts/dogica/dogicapixel.ttf");
-}
-@font-face {
-    font-family: dogicapixelbold;
-    src: url("@/fonts/dogica/dogicapixelbold.ttf");
-}

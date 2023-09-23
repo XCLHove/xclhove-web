@@ -1,8 +1,8 @@
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
 
 const router = createRouter({
-    // history: createWebHistory(import.meta.env.BASE_URL),
-    history: createWebHashHistory(import.meta.env.BASE_URL),
+    history: createWebHistory(import.meta.env.BASE_URL),
+    // history: createWebHashHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
@@ -26,6 +26,26 @@ const router = createRouter({
             path: '/backLogin',
             name: 'backLogin',
             component: () => import('@/views/BackLogin.vue'),
+        },
+        {
+            path: '/drive',
+            name: 'drive',
+            component: () => import('@/views/Drive.vue'),
+        },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: () => import('@/views/Admin.vue'),
+        },
+        {
+            path: '/addStorage',
+            name: 'addStorage',
+            component: () => import('@/views/AddStorage.vue'),
+        },
+        {
+            path: '/callback',
+            name: 'callback',
+            component: () => import('@/views/Callback.vue'),
         },
         {
             path: '/404',

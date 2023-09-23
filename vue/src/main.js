@@ -2,7 +2,7 @@ import '@/assets/main.less'
 import '@/icon/alibaba/iconfont.css'
 import {createApp} from 'vue'
 import App from '@/App.vue'
-import Head from '@/components/Head.vue'
+import Head from '@/components/WebHead.vue'
 import Load from '@/components/Load.vue'
 //router
 import router from "@/router/router";

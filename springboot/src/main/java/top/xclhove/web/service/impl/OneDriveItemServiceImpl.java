@@ -1,9 +1,7 @@
 package top.xclhove.web.service.impl;
 
-import cn.hutool.http.ContentType;
-import cn.hutool.http.Header;
 import cn.hutool.http.HttpResponse;
-import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -16,17 +14,19 @@ import top.xclhove.web.common.Result;
 import top.xclhove.web.entity.OneDrive;
 import top.xclhove.web.entity.OneDriveInfo.OneDriveInfo;
 import top.xclhove.web.entity.OneDriveItem;
-import top.xclhove.web.entity.http.httpOneDrive.HttpOneDriveItem;
-import top.xclhove.web.entity.http.httpOneDrive.ParentReference;
+import top.xclhove.web.entity.http.OneDrive.Item;
+import top.xclhove.web.entity.http.OneDrive.ParentReference;
 import top.xclhove.web.http.OneDriveHttpResponse;
 import top.xclhove.web.mapper.OneDriveItemMapper;
-import top.xclhove.web.utils.interpolation.Interpolations;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author xclhove
+ */
 @Service
 @Slf4j
 public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, OneDriveItem> {
@@ -36,15 +36,15 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
     /**
      * 获取根目录信息并存储到MySQL
      *
-     * @param oneDrive
-     * @return OneDriveRootInfo
+     * @param oneDrive OneDrive实体类
+     * @return OneDriveInfo实体类
      */
     public OneDriveInfo getOneDriveRootInfo(OneDrive oneDrive) {
         //通过access_token获取根目录信息
         HttpResponse httpResponse = OneDriveHttpResponse.getQueryRootInfoResponse(oneDrive.getAccess_token());
 
         //转换以便提取
-        HttpOneDriveItem responseBody = HttpOneDriveItem.parse(httpResponse.body());
+        Item responseBody = JSON.parseObject(httpResponse.body(), Item.class);
         ParentReference parentReference = responseBody.getParentReference();
 
         //提取根目录driveId
@@ -89,8 +89,8 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
     /**
      * 从指定存储源(drive)的指定目录(item)开始递归获取所有子目录与文件信息并存储到MySQL
      *
-     * @param oneDrive
-     * @param itemId
+     * @param oneDrive 文件夹所属OneDrive的实体类
+     * @param itemId   文件夹id
      */
     public void getItemChildrenInfo(OneDrive oneDrive, String itemId) {
         //获取目录的子项信息
@@ -99,9 +99,7 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
                 itemId,
                 oneDrive.getAccess_token()
         );
-        String itemChildrenInfo = httpResponse
-                .body().
-                replace("@microsoft.graph.downloadUrl", "downloadUrl");
+        String itemChildrenInfo = httpResponse.body();
 
         //将子项信息转换为JSON数组
         JSONArray jsonArray = JSONObject.parseObject(itemChildrenInfo).getJSONArray("value");
@@ -109,23 +107,23 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
         //遍历(JSON数组)目录的子项
         for (Object jsonArrayItem : jsonArray) {
             //子项信息转换为java对象
-            HttpOneDriveItem httpOneDriveItem = HttpOneDriveItem.parse(jsonArrayItem.toString());
+            Item item = JSON.parseObject(jsonArrayItem.toString(), Item.class);
 
             //提取子项信息
-            String name = httpOneDriveItem.getName();
-            String childItemId = httpOneDriveItem.getId();
-            String size = httpOneDriveItem.getSize();
-            Integer isFile = httpOneDriveItem.getIsFile();
-            String downloadUrl = httpOneDriveItem.getDownloadUrl();
-            Integer parentId = httpOneDriveItem.getPatentId();
-            Integer isRoot = httpOneDriveItem.getIsRoot();
+            String name = item.getName();
+            String childItemId = item.getId();
+            String size = item.getSize();
+            Integer isFile = item.getIsFile();
+            String downloadUrl = item.getDownloadUrl();
+            Integer parentId = item.getPatentId();
+            Integer isRoot = item.getIsRoot();
 
             //处理子项信息
             LambdaQueryWrapper<OneDriveItem> queryWrapper = new LambdaQueryWrapper<>();
-            queryWrapper.eq(OneDriveItem::getItemId, httpOneDriveItem.getParentReference().getId());
+            queryWrapper.eq(OneDriveItem::getItemId, item.getParentReference().getId());
             OneDriveItem parentItem = this.getOne(queryWrapper);
             try {
-                //处理parentId(top.xclhove.web.entity.http.httpOneDrive.HttpOneDriveItem-->parentId默认为0)
+                //处理parentId(top.xclhove.web.entity.http.httpOneDrive.Item-->parentId默认为0)
                 parentId = parentItem.getId();
             } catch (NullPointerException nullPointerException) {
                 //nullPointerException不做处理
@@ -158,7 +156,7 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
             //判断该子项是否有子项，有则继续获取并储存
             Integer childCount = 0;
             try {
-                childCount = httpOneDriveItem.getFolder().getChildCount();
+                childCount = item.getFolder().getChildCount();
             } catch (NullPointerException nullPointerException) {
                 //nullPointerException不做处理
             } catch (Exception exception) {
@@ -182,7 +180,7 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
 
         //获取所有存储源
         List<OneDrive> oneDrives = oneDriveService.list();
-        if (oneDrives.size() == 0) {
+        if (oneDrives.isEmpty()) {
             return Result.success("无存储源！");
         }
         for (OneDrive oneDrive : oneDrives) { //遍历所有存储源
@@ -200,6 +198,7 @@ public class OneDriveItemServiceImpl extends ServiceImpl<OneDriveItemMapper, One
 
     /**
      * 获取指定目录下的文件，默认为根目录
+     *
      * @param itemId
      * @return oneDriveItems
      */

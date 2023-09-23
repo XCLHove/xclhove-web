@@ -21,7 +21,6 @@ export default defineConfig({
   },
   server: {
     //前端端口
-    port: 5555,
-    host: '0.0.0.0'
+    port: 8080,
   }
 })

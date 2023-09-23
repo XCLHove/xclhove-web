@@ -1,4 +1,4 @@
-package top.xclhove.web.entity.http.httpOneDrive;
+package top.xclhove.web.entity.http.OneDrive;
 
 import lombok.Data;
 

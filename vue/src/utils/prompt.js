@@ -1,9 +1,9 @@
 import {ElMessage} from "element-plus";
 
-const prompt = (message, type) => {
+const prompt = (message, type = 'info', durationSecond= 1) => {
     ElMessage({
         showClose: true,
-        duration: 1000,
+        duration: durationSecond * 1000,
         message: message,
         type: type
     })

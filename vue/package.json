@@ -10,11 +10,15 @@
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
     "@element-plus/icons-vue": "^2.1.0",
+    "@vueuse/core": "^10.3.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.8",
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",
+    "qs": "^6.11.2",
     "vue": "^3.3.4",
+    "vue-clipboard3": "^2.0.0",
+    "vue-contextmenu": "^1.5.11",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {

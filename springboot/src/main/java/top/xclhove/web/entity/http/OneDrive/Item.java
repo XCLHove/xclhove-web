@@ -1,12 +1,14 @@
-package top.xclhove.web.entity.http.httpOneDrive;
+package top.xclhove.web.entity.http.OneDrive;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.text.DecimalFormat;
 
 @Data
-public class HttpOneDriveItem {
+public class Item {
     private String createdDateTime;
     private String id;
     private String lastModifiedDateTime;
@@ -14,6 +16,7 @@ public class HttpOneDriveItem {
     private Integer isFile = 0;
     private Integer isRoot = 0;
     private Integer patentId;
+    @JsonProperty("@microsoft.graph.downloadUrl")
     private String downloadUrl;
     private String size;
     private ParentReference parentReference;
@@ -21,12 +24,12 @@ public class HttpOneDriveItem {
     private Error error;
 
     public String getSize() {
-        if (this.size.equals("0")){
+        if ("0".equals(this.size)) {
             return this.size + "B";
         }
         int sizeLevel = 1;
-        Long longSize = Long.parseLong(this.size);
-        Long remainder = 0L;
+        long longSize = Long.parseLong(this.size);
+        long remainder = 0L;
         while (longSize > 1024) {
             remainder = longSize % 1024;
             longSize /= 1024;
@@ -61,19 +64,11 @@ public class HttpOneDriveItem {
 
     public Integer getIsFile() {
         if (this.downloadUrl != null &&
-                !this.downloadUrl.equals("") &&
+                !this.downloadUrl.isEmpty() &&
                 this.downloadUrl.startsWith("http")
         ) {
             this.isFile = 1;
         }
         return isFile;
-    }
-
-    public static HttpOneDriveItem parse(String string) {
-        try {
-            return JSONObject.parse(string).toJavaObject(HttpOneDriveItem.class);
-        } catch (Exception exception) {
-            throw exception;
-        }
     }
 }

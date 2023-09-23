@@ -3,6 +3,7 @@ package top.xclhove.web.service.impl;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import top.xclhove.web.common.Constant.OneDriveKey;
 import top.xclhove.web.common.Result;
+import top.xclhove.web.entity.DTO.Storage;
 import top.xclhove.web.entity.OneDrive;
+import top.xclhove.web.entity.http.OneDrive.Token;
+import top.xclhove.web.http.OneDriveHttp;
 import top.xclhove.web.mapper.OneDriveMapper;
 import top.xclhove.web.utils.interpolation.Interpolations;
 
@@ -90,5 +94,39 @@ public class OneDriveServiceImpl extends ServiceImpl<OneDriveMapper, OneDrive> {
                 newRefreshToken);
 
         return Result.error("请求成功，更新失败！", oneDrive);
+    }
+
+    public Result getToken(Storage storage) {
+        Map<String, Object> postData = new HashMap<>();
+        postData.put(OneDriveKey.CLIENT_ID, storage.getClientId());
+        postData.put(OneDriveKey.CLIENT_SECRET, storage.getClientSecret());
+        postData.put(OneDriveKey.REDIRECT_URI, storage.getRedirectUri());
+        postData.put(OneDriveKey.CODE, storage.getCode());
+        postData.put(OneDriveKey.GRANT_TYPE, OneDriveKey.GrantType.AUTHORIZATION_CODE);
+
+        String postResult = HttpUtil.post(OneDriveHttp.getTokenApi(), postData);
+        Token token = JSON.parseObject(postResult, Token.class);
+
+        String errorDescription = token.getErrorDescription();
+        if (errorDescription != null) {
+            return Result.error(errorDescription.split("\\r\\n")[0].split(": ")[1]);
+        }
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("token", token);
+        return Result.success(data);
+    }
+
+    public Result addOrUpdate(OneDrive oneDrive) {
+        boolean operationSuccess = false;
+        try {
+            operationSuccess = this.saveOrUpdate(oneDrive);
+        } catch (Exception exception) {
+            //operationSuccess = false;
+        }
+        if (!operationSuccess) {
+            return Result.error("操作失败，请再次尝试！");
+        }
+        return Result.success("操作成功！");
     }
 }
